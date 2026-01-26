@@ -5,15 +5,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-st.title('')
+st.title('全体タイトル')
 
-st.header('')
+st.header('説明欄表示')
 
-st.subheader('')
+st.subheader('説明対象')
 
-st.write('')
+st.write('説明内容')
 
-with st.sidebar:
+st.header('データ確認')
+
+# with st.sidebar:
     
 
 # df = pd.read_csv('ad_expense_sales.csv')
@@ -62,6 +64,7 @@ with st.sidebar:
 # ✓ データの可視化（最低2種類のグラフ）
 # ✓ 比較や傾向が分かる表示（地域差など）
 # ✓ 可視化結果の簡単な解釈や説明
+
 
 # ✓ サイドバー等で条件を変更できる
 # ✓ 例：都道府県、年、期間、指標など
