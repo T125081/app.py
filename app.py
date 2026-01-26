@@ -8,7 +8,7 @@ st.title('全体タイトル')
 
 st.header('説明欄表示')
 
-st.subheader('対象')
+st.subheader('説明対象')
 
 st.write('説明内容')
 
