@@ -4,7 +4,6 @@ import streamlit as st
 # import numpy as np
 # import matplotlib.pyplot as plt
 
-
 st.title('全体タイトル')
 
 st.header('説明欄表示')
@@ -17,6 +16,7 @@ st.header('データ確認')
 
 # with st.sidebar:
     
+
 
 # df = pd.read_csv('ad_expense_sales.csv')
 
