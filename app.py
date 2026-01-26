@@ -14,7 +14,7 @@ st.write('説明内容')
 
 st.header('データ確認')
 
-# with st.sidebar:なめ
+# with st.sidebar:
     
 
 
