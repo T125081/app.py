@@ -1,6 +1,12 @@
 import streamlit as st
 
-st.title('Streamlitの基本')
+st.title('')
+
+st.header('')
+
+st.subheader('')
+
+st.write('')
 
 
 # e-Stat（政府統計）のデータを使用
