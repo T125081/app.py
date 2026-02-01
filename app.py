@@ -18,6 +18,10 @@ st.header('データ確認')
     
 
 
+
+# 栄養表の各データ
+# 年齢別　総合
+
 # df = pd.read_csv('ad_expense_sales.csv')
 
 # with st.sidebar:
