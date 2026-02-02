@@ -42,7 +42,10 @@ df_long = df.melt(
     value_name="量"
 )
 
+order = df["食品産業"].tolist()
+
 # AIに聞いた箇所↑
+
 cols1 = st.columns(2)
 
 with cols1[0]:
@@ -52,7 +55,7 @@ with cols1[0]:
         alt.Chart(df_long)
         .mark_bar()
         .encode(
-            alt.X("食品産業:N",title="食品産業計種類"),
+            alt.X("食品産業:N",sort=order,title="食品産業計種類"),
             alt.Y("量:Q",title="合計量 【千t】"),
             alt.Color("内訳:N",title="内訳"),
         )
