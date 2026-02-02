@@ -61,18 +61,19 @@ with st.container():
         use_container_width=True
     )
 
-st.subheader("各量の内訳の比較の為の棒グラフ")
-st.altair_chart(
-    alt.Chart(df_long)
-    .mark_bar()
-    .encode(
-        alt.X("食品産業:N",sort=order,title="食品産業計種類"),
-        alt.Y("sum(量):Q",stack="normalize",title="各割合 【%】"),
-        alt.Color("内訳:N",title="内訳"),
+with st.container():
+    st.subheader("各量の内訳の比較の為の棒グラフ")
+    st.altair_chart(
+        alt.Chart(df_long)
+        .mark_bar()
+        .encode(
+            alt.X("食品産業:N",sort=order,title="食品産業計種類"),
+            alt.Y("sum(量):Q",stack="normalize",title="各割合 【%】"),
+            alt.Color("内訳:N",title="内訳"),
+        )
+        .configure_legend(orient="bottom"),
+        use_container_width=True
     )
-    .configure_legend(orient="bottom"),
-    use_container_width=True
-)
 
 with st.sidebar:
     st.subheader('円グラフに表示する')
@@ -84,22 +85,23 @@ df_s = df_long[df_long["食品産業"]==fo_lo_kind]
 df_s = df_s.copy()
 df_s["割合"] = df_s["量"] / df_s["量"].sum()
 
-st.subheader("内訳の円グラフ〈ページ左上の＞をクリックして開くことができるサイドバーの中で、内訳を確認したい食品産業計種類を選択してください。〉")
-st.altair_chart(
-    alt.Chart(df_s)
-    .mark_arc()
-    .encode(
-        alt.Theta("量:Q",stack="normalize"),
-        alt.Color("内訳:N",title="内訳"),
-        # alt.Tooltip([
-        #     alt.Tooltip("内訳:N", title="内訳"),
-        #     alt.Tooltip("量:Q", title="量【千t】", format=",.1f"),
-        #     alt.Tooltip("割合:Q", title="割合【%】", format=".1%")
-        # ])
+with st.container():
+    st.subheader("内訳の円グラフ〈ページ左上の＞をクリックして開くことができるサイドバーの中で、内訳を確認したい食品産業計種類を選択してください。〉")
+    st.altair_chart(
+        alt.Chart(df_s)
+        .mark_arc()
+        .encode(
+            alt.Theta("量:Q",stack="normalize"),
+            alt.Color("内訳:N",title="内訳"),
+            # alt.Tooltip([
+            #     alt.Tooltip("内訳:N", title="内訳"),
+            #     alt.Tooltip("量:Q", title="量【千t】", format=",.1f"),
+            #     alt.Tooltip("割合:Q", title="割合【%】", format=".1%")
+            # ])
+        )
+        .configure_legend(orient="bottom"),
+        use_container_width=True
     )
-    .configure_legend(orient="bottom"),
-    use_container_width=True
-)
 
 
 
