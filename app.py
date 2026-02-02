@@ -80,7 +80,7 @@ with st.sidebar:
 df_s = df_long[df_long["食品産業"]==fo_lo_kind]
 
 df_s = df_s.copy()
-df_s["割合"] = df_s["量"] / df_s["量"].sum()
+# df_s["割合"] = df_s["量"] / df_s["量"].sum()
 
 
 # chart = alt.Chart(df_s).mark_arc().encode(
