@@ -53,7 +53,8 @@ st.altair_chart(
         alt.Y("量:Q",title="合計量 【千t】"),
         alt.Color("内訳:N",title="内訳"),
     )
-    .configure_legend(orient="bottom")
+    .configure_legend(orient="bottom"),
+    use_container_width=True
 )
 
 st.subheader("各量の内訳の比較の為の棒グラフ")
@@ -65,7 +66,8 @@ st.altair_chart(
         alt.Y("量:Q",title="各割合 【%】").stack("normalize"),
         alt.Color("内訳:N",title="内訳"),
     )
-    .configure_legend(orient="bottom")
+    .configure_legend(orient="bottom"),
+    use_container_width=True
 )
 
 with st.sidebar:
@@ -75,6 +77,7 @@ with st.sidebar:
 
 df_s = df_long[df_long["食品産業"]==fo_lo_kind]
 
+df_s = df_s.copy()
 df_s["割合"] = df_s["量"] / df_s["量"].sum()
 
 st.subheader("内訳の円グラフ〈ページ左上の＞をクリックして開くことができるサイドバーの中で、内訳を確認したい食品産業計種類を選択してください。〉")
@@ -82,7 +85,7 @@ st.altair_chart(
     alt.Chart(df_s)
     .mark_arc()
     .encode(
-        alt.Theta("量:Q",title="各割合 【%】").stack("normalize"),
+        alt.Theta("量:Q",stack="normalize",title="各割合 【%】"),
         alt.Color("内訳:N",title="内訳"),
         alt.Tooltip([
             alt.Tooltip("内訳:N", title="内訳"),
@@ -90,7 +93,8 @@ st.altair_chart(
             alt.Tooltip("割合:Q", title="割合【%】", format=".1%")
         ])
     )
-    .configure_legend(orient="bottom")
+    .configure_legend(orient="bottom"),
+    use_container_width=True
 )
 
 
