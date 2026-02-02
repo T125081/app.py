@@ -63,7 +63,7 @@ st.altair_chart(
     .mark_bar()
     .encode(
         alt.X("食品産業:N",sort=order,title="食品産業計種類"),
-        alt.Y("量:Q",title="各割合 【%】").stack("normalize"),
+        alt.Y("量:Q",stack="normalize",title="各割合 【%】"),
         alt.Color("内訳:N",title="内訳"),
     )
     .configure_legend(orient="bottom"),
