@@ -34,7 +34,7 @@ with cols[0].container(border=True):
         .encode(
             alt.X("食品産業:N",title="食品産業計種類"),
             alt.Y("sum(total):Q",title="合計量 【千t】"),
-            alt.Color("食品産業:N",title="各量"),
+            alt.Color("sum(total):Q",title="各量"),
         )
         .configure_legend(orient="bottom")
     )
