@@ -75,7 +75,7 @@ with st.sidebar:
 
 df_s = df_long[df_long["食品産業"]==fo_lo_kind]
     
-st.subheader("内訳の円グラフ")
+st.subheader("内訳の円グラフ〈ページ左上の＞をクリックして開くことができるサイドバーの中で、内訳を確認したい食品産業計種類を選択してください。〉")
 st.altair_chart(
     alt.Chart(df_s)
     .mark_arc()
