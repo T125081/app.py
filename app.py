@@ -4,17 +4,17 @@ import pandas as pd
 # import numpy as np
 # import matplotlib.pyplot as plt
 
-st.title('全体タイトル')
+st.title('「食品産業における食品廃棄物等の年間発生量、発生抑制の実施量及び再生利用等実施率」を基にした')
 
 st.header('説明欄表示')
 
 st.subheader('説明対象')
 
-st.write('説明内容')
+st.write('説明内容\n(引用：〈担当機関・課室〉農林水産省　消費統計室, 〈公開年月日時分〉2025-01-31 00:00, 食品循環資源の再生利用等実態調査 確報 令和４年度食品循環資源の再生利用等実態調査 統計表 1 食品産業における食品廃棄物等の年間発生量、発生抑制の実施量及び再生利用等実施率 年度次 | データベース | 統計データを探す | 政府統計の総合窓口, https://www.e-stat.go.jp/stat-search/database?page=1&layout=datalist&toukei=00500231&bunya_l=04&tstat=000001127995&cycle=8&tclass1=000001127996&tclass2=000001217140&statdisp_id=0002110164&tclass3val=0 〈2026/2/2 参照〉)')
 
 st.header('データ確認')
 
-df = pd.read_csv('')
+df = pd.read_csv('FEH_00500231_260202222416.csv')
 
 with st.sidebar:
     st.subheader('抽出条件')
