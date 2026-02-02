@@ -54,7 +54,7 @@ with cols1[0]:
         .mark_bar()
         .encode(
             alt.X("食品産業:N",title="食品産業計種類"),
-            alt.Y("sum(量):Q",title="合計量 【千t】"),
+            alt.Y("量:Q",title="合計量 【千t】"),
             alt.Color("内訳:N",title="内訳"),
         )
         .configure_legend(orient="bottom")
