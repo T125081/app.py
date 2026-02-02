@@ -19,42 +19,26 @@ st.write('(引用：〈担当機関・課室〉農林水産省　消費統計室
 
 st.header('データ確認')
 
-df = pd.read_csv('FEH_00500231_260202222416.csv')
+df = pd.read_csv('FEH_00500231_260202222416 copy.csv')
+
+df["total"] = df[["食品廃棄物等の年間発生量_1)食品リサイクル法で規定している用途への実施量【千t】","食品廃棄物等の年間発生量_熱回収の実施量【千t】","食品廃棄物等の年間発生量_減量した量【千t】","食品廃棄物等の年間発生量_2)その他【千t】","食品廃棄物等の年間発生量_廃棄物としての処分量【千t】","発生抑制の実施量【千t】"]].sum(axis=1)
+
+with df.container(border=True, height="stretch"):
+    "### 各量の全体量とそれの内訳の比較棒グラフ"
+
+    st.altair_chart(
+        alt.Chart(df)
+        .mark_bar()
+        .encode(
+            alt.X("食品産業:N").title("食品産業計種類"),
+            alt.Y("sum(total):Q").aggregate(df["食品廃棄物等の年間発生量_計【千t】"]).title("合計量 【千t】"),
+            alt.Color("食品産業:N").title("各量"),
+        )
+        .configure_legend(orient="bottom")
+    )
 
 
-
-
-
-# with cols[1].container(border=True, height="stretch"):
-#     "### Weather distribution"
-
-#     st.altair_chart(
-#         alt.Chart(df)
-#         .mark_arc()
-#         .encode(
-#             alt.Theta("count()"),
-#             alt.Color("weather:N"),
-#         )
-#         .configure_legend(orient="bottom")
-#     )
-
-
-# with cols[1].container(border=True, height="stretch"):
-#     "### Precipitation"
-
-#     st.altair_chart(
-#         alt.Chart(df)
-#         .mark_bar()
-#         .encode(
-#             alt.X("date:N", timeUnit="month").title("食品産業計種類"),
-#             alt.Y("precipitation:Q").aggregate("sum").title("合計量 【千t】"),
-#             alt.Color("date:N", timeUnit="year").title("各量"),
-#         )
-#         .configure_legend(orient="bottom")
-#     )
-
-
-# with cols[0].container(border=True, height="stretch"):
+# with df.container(border=True, height="stretch"):
 #     "### Monthly weather breakdown"
 #     ""
 
@@ -72,24 +56,35 @@ df = pd.read_csv('FEH_00500231_260202222416.csv')
 
 
 
-with st.sidebar:
-    st.subheader('抽出条件')
-    prod_category = st.multiselect('製品カテゴリを選択してください（複数選択可）', 
-                                   df['prod_category'].unique())
-    media = st.selectbox('広告媒体を選択してください', 
-                         df['media'].unique())
-    st.subheader('色分け')    
-    color = st.selectbox('分類を選択してください',
-                      ['性別', '年齢層', '季節'])  
-    if color == '性別':
-        color = 'sex'
-    elif color == '年齢層':
-        color = 'age'
-    else:
-        color = 'season'
+# with st.sidebar:
+#     st.subheader('円グラフに表示する')
+#     prod_category = st.multiselect('食品産業計種類を選択してください（複数選択可）', 
+#                                    df['prod_category'].unique())
+#     media = st.selectbox('広告媒体を選択してください', 
+#                          df['media'].unique())
+#     st.subheader('色分け')    
+#     color = st.selectbox('分類を選択してください',
+#                       ['性別', '年齢層', '季節'])  
+#     if color == '性別':
+#         color = 'sex'
+#     elif color == '年齢層':
+#         color = 'age'
+#     else:
+#         color = 'season'
     
 
+# with cols[1].container(border=True, height="stretch"):
+#     "### Weather distribution"
 
+#     st.altair_chart(
+#         alt.Chart(df)
+#         .mark_arc()
+#         .encode(
+#             alt.Theta("count()"),
+#             alt.Color("weather:N"),
+#         )
+#         .configure_legend(orient="bottom")
+#     )
 
 
 
