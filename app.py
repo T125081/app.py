@@ -42,7 +42,9 @@ df_long = df.melt(
     value_name="量"
 )
 
-order = (df["食品産業"].dropna().astype(str).unique().tolist())
+df_long["食品産業"] = df_long["食品産業"].astype(str)
+
+order = df_long["食品産業"].unique().tolist()
 
 st.subheader("各量の全体量とそれの内訳の比較の為の棒グラフ")    
 st.altair_chart(
@@ -93,7 +95,7 @@ st.altair_chart(
     alt.Chart(df_s)
     .mark_arc()
     .encode(
-        alt.Theta("量:Q", stack="normalize", title="各割合 【%】"),
+        alt.Theta("量:Q"),
         alt.Color("内訳:N",title="内訳"),
         alt.Tooltip([
             alt.Tooltip("内訳:N", title="内訳"),
