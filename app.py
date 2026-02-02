@@ -50,7 +50,7 @@ with cols1[0]:
     "### 各量の全体量とそれの内訳の比較棒グラフ"
 
     st.altair_chart(
-        alt.Chart(df)
+        alt.Chart(df_long)
         .mark_bar()
         .encode(
             alt.X("食品産業:N",title="食品産業計種類"),
