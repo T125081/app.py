@@ -1,5 +1,5 @@
 import streamlit as st
-# import pandas as pd
+import pandas as pd
 # import plotly.express as px
 # import numpy as np
 # import matplotlib.pyplot as plt
@@ -14,7 +14,23 @@ st.write('説明内容')
 
 st.header('データ確認')
 
-# with st.sidebar:
+df = pd.read_csv('nu-r5-1-1.xlsx')
+
+with st.sidebar:
+    st.subheader('抽出条件')
+    prod_category = st.multiselect('製品カテゴリを選択してください（複数選択可）', 
+                                   df['prod_category'].unique())
+    media = st.selectbox('広告媒体を選択してください', 
+                         df['media'].unique())
+    st.subheader('色分け')    
+    color = st.selectbox('分類を選択してください',
+                      ['性別', '年齢層', '季節'])  
+    if color == '性別':
+        color = 'sex'
+    elif color == '年齢層':
+        color = 'age'
+    else:
+        color = 'season'
     
 
 
