@@ -25,6 +25,26 @@ df["total"] = df[["食品廃棄物等の年間発生量_1)食品リサイクル�
 
 cols = st.columns(2)
 
+# AIに聞いた箇所↓
+
+cols = [
+    "食品廃棄物等の年間発生量_1)食品リサイクル法で規定している用途への実施量【千t】",
+    "食品廃棄物等の年間発生量_熱回収の実施量【千t】",
+    "食品廃棄物等の年間発生量_減量した量【千t】",
+    "食品廃棄物等の年間発生量_2)その他【千t】",
+    "食品廃棄物等の年間発生量_廃棄物としての処分量【千t】",
+    "発生抑制の実施量【千t】",
+]
+
+df_long = df.melt(
+    id_vars=["食品産業"],
+    value_vars=cols,
+    var_name="内訳",
+    value_name="量"
+)
+
+# AIに聞いた箇所↑
+
 with cols[0]:
     "### 各量の全体量とそれの内訳の比較棒グラフ"
 
@@ -33,8 +53,8 @@ with cols[0]:
         .mark_bar()
         .encode(
             alt.X("食品産業:N",title="食品産業計種類"),
-            alt.Y("sum(total):Q",title="合計量 【千t】"),
-            alt.Color("sum(total):Q",title="各量"),
+            alt.Y("sum(量):Q",title="合計量 【千t】"),
+            alt.Color("内訳:N",title="内訳"),
         )
         .configure_legend(orient="bottom")
     )
