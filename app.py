@@ -52,7 +52,7 @@ order = df["食品産業"].tolist()
 cols1 = st.columns(2)
 
 with cols1[0]:
-    "### 各量の全体量とそれの内訳の比較棒グラフ"
+    "### 各量の全体量とそれの内訳の比較の為の棒グラフ"
 
     st.altair_chart(
         alt.Chart(df_long)
@@ -65,16 +65,29 @@ with cols1[0]:
         .configure_legend(orient="bottom")
     )
 
+with cols1[1]:
+    "### 各量の内訳の比較の為の棒グラフ"
 
-# with df.container(border=True, height="stretch"):
-#     "### Monthly weather breakdown"
-#     ""
+    st.altair_chart(
+        alt.Chart(df_long)
+        .mark_bar()
+        .encode(
+            alt.X("食品産業:N",sort=order,title="食品産業計種類"),
+            alt.Y("量:Q",title="各割合 【%】").stack("normalize"),
+            alt.Color("内訳:N",title="内訳"),
+        )
+        .configure_legend(orient="bottom")
+    )
+
+
+# with cols1[1]:
+#     "### "
 
 #     st.altair_chart(
-#         alt.Chart(df)
+#         alt.Chart(df_long)
 #         .mark_bar()
 #         .encode(
-#             alt.X("month(date):O", title="食品産業計種類"),
+#             alt.X("食品産業:N",sort=order,title="食品産業計種類"),
 #             alt.Y("count():Q", title="各割合 【%】").stack("normalize"),
 #             alt.Color("weather:N"),
 #         )
