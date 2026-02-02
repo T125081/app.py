@@ -80,7 +80,7 @@ with st.sidebar:
 df_s = df_long[df_long["食品産業"]==fo_lo_kind]
 
 df_s = df_s.copy()
-# df_s["割合"] = df_s["量"] / df_s["量"].sum()
+df_s["割合"] = df_s["量"] / df_s["量"].sum()
 
 
 # chart = alt.Chart(df_s).mark_arc().encode(
@@ -93,21 +93,15 @@ df_s = df_s.copy()
 st.subheader("内訳の円グラフ〈ページ左上の＞をクリックして開くことができるサイドバーの中で、内訳を確認したい食品産業計種類を選択してください。〉")
 st.altair_chart(
     alt.Chart(df_s)
-    .transform_joinaggregate(
-        total="sum(量)"
-    )
-    .transform_calculate(
-        割合="datum.量 / datum.total"
-    )
     .mark_arc()
     .encode(
         alt.Theta("量:Q"),
         alt.Color("内訳:N",title="内訳"),
-        alt.Tooltip([
-            alt.Tooltip("内訳:N", title="内訳"),
-            alt.Tooltip("量:Q", title="量【千t】", format=",.1f"),
-            alt.Tooltip("割合:Q", title="割合【%】", format=".1%")
-        ])
+        # alt.Tooltip([
+        #     alt.Tooltip("内訳:N", title="内訳"),
+        #     alt.Tooltip("量:Q", title="量【千t】", format=",.1f"),
+        #     alt.Tooltip("割合:Q", title="割合【%】", format=".1%")
+        # ])
     )
     .configure_legend(orient="bottom"),
     use_container_width=True
