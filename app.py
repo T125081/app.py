@@ -25,7 +25,7 @@ df["total"] = df[["食品廃棄物等の年間発生量_1)食品リサイクル�
 
 cols = st.columns(2)
 
-with cols[0].container(border=True):
+with cols[0]:
     "### 各量の全体量とそれの内訳の比較棒グラフ"
 
     st.altair_chart(
