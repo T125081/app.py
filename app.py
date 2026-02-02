@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import altair as alt
 # import plotly.express as px
 # import numpy as np
 # import matplotlib.pyplot as plt
@@ -8,7 +9,7 @@ st.title('「食品産業における食品廃棄物等の年間発生量、発�
 
 st.header('〈このアプリとは〉')
 
-st.write('調査年月2022年度の統計表「食品産業における食品廃棄物等の年間発生量、発生抑制の実施量及び再生利用等実施率」から得られるデータを基に、')
+st.write('調査年月2022年度の統計表「食品産業における食品廃棄物等の年間発生量、発生抑制の実施量及び再生利用等実施率」から得られるデータを基に、アプリ。')
 
 st.subheader("〈調査の概要 [引用ページより]〉")
 
@@ -19,6 +20,57 @@ st.write('(引用：〈担当機関・課室〉農林水産省　消費統計室
 st.header('データ確認')
 
 df = pd.read_csv('FEH_00500231_260202222416.csv')
+
+
+
+
+
+# with cols[1].container(border=True, height="stretch"):
+#     "### Weather distribution"
+
+#     st.altair_chart(
+#         alt.Chart(df)
+#         .mark_arc()
+#         .encode(
+#             alt.Theta("count()"),
+#             alt.Color("weather:N"),
+#         )
+#         .configure_legend(orient="bottom")
+#     )
+
+
+# with cols[1].container(border=True, height="stretch"):
+#     "### Precipitation"
+
+#     st.altair_chart(
+#         alt.Chart(df)
+#         .mark_bar()
+#         .encode(
+#             alt.X("date:N", timeUnit="month").title("食品産業計種類"),
+#             alt.Y("precipitation:Q").aggregate("sum").title("合計量 【千t】"),
+#             alt.Color("date:N", timeUnit="year").title("各量"),
+#         )
+#         .configure_legend(orient="bottom")
+#     )
+
+
+# with cols[0].container(border=True, height="stretch"):
+#     "### Monthly weather breakdown"
+#     ""
+
+#     st.altair_chart(
+#         alt.Chart(df)
+#         .mark_bar()
+#         .encode(
+#             alt.X("month(date):O", title="食品産業計種類"),
+#             alt.Y("count():Q", title="各割合 【%】").stack("normalize"),
+#             alt.Color("weather:N"),
+#         )
+#         .configure_legend(orient="bottom")
+#     )
+
+
+
 
 with st.sidebar:
     st.subheader('抽出条件')
@@ -36,6 +88,10 @@ with st.sidebar:
     else:
         color = 'season'
     
+
+
+
+
 
 
 
