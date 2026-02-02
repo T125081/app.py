@@ -87,7 +87,7 @@ st.altair_chart(
         alt.Tooltip([
             alt.Tooltip("内訳:N", title="内訳"),
             alt.Tooltip("量:Q", title="量【千t】", format=",.1f"),
-            alt.Tooltip("割合:Q", title="割合【%】", stack="normalize", format=".1%")
+            alt.Tooltip("割合:Q", title="割合【%】", format=".1%")
         ])
     )
     .configure_legend(orient="bottom")
