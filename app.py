@@ -46,18 +46,20 @@ df_long["食品産業"] = df_long["食品産業"].astype(str)
 
 order = df_long["食品産業"].unique().tolist()
 
-st.subheader("各量の全体量とそれの内訳の比較の為の棒グラフ")    
-st.altair_chart(
-    alt.Chart(df_long)
-    .mark_bar()
-    .encode(
-        alt.X("食品産業:N",sort=order,title="食品産業計種類"),
-        alt.Y("sum(量):Q",title="合計量 【千t】"),
-        alt.Color("内訳:N",title="内訳"),
+with st.container:
+
+    st.subheader("各量の全体量とそれの内訳の比較の為の棒グラフ")    
+    st.altair_chart(
+        alt.Chart(df_long)
+        .mark_bar()
+        .encode(
+            alt.X("食品産業:N",sort=order,title="食品産業計種類"),
+            alt.Y("sum(量):Q",title="合計量 【千t】"),
+            alt.Color("内訳:N",title="内訳"),
+        )
+        .configure_legend(orient="bottom"),
+        use_container_width=True
     )
-    .configure_legend(orient="bottom"),
-    use_container_width=True
-)
 
 st.subheader("各量の内訳の比較の為の棒グラフ")
 st.altair_chart(
