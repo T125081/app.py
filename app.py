@@ -42,7 +42,7 @@ df_long = df.melt(
     value_name="量"
 )
 
-order = df["食品産業"].dropna().astype(str).unique().tolist()
+order = (df["食品産業"].dropna().astype(str).unique().tolist())
 
 st.subheader("各量の全体量とそれの内訳の比較の為の棒グラフ")    
 st.altair_chart(
@@ -50,7 +50,7 @@ st.altair_chart(
     .mark_bar()
     .encode(
         alt.X("食品産業:N",sort=order,title="食品産業計種類"),
-        alt.Y("量:Q",title="合計量 【千t】"),
+        alt.Y("sum(量):Q",title="合計量 【千t】"),
         alt.Color("内訳:N",title="内訳"),
     )
     .configure_legend(orient="bottom"),
@@ -81,12 +81,12 @@ df_s = df_s.copy()
 df_s["割合"] = df_s["量"] / df_s["量"].sum()
 
 
-chart = alt.Chart(df_s).mark_arc().encode(
-    alt.Theta("量:Q", stack="normalize"),
-    alt.Color("内訳:N")
-)
+# chart = alt.Chart(df_s).mark_arc().encode(
+#     alt.Theta("量:Q", stack="normalize"),
+#     alt.Color("内訳:N")
+# )
 
-st.write(chart.to_dict())
+# st.write(chart.to_dict())
 
 st.subheader("内訳の円グラフ〈ページ左上の＞をクリックして開くことができるサイドバーの中で、内訳を確認したい食品産業計種類を選択してください。〉")
 st.altair_chart(
