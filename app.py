@@ -98,6 +98,12 @@ st.altair_chart(
 )
 
 
+chart = alt.Chart(df_s).mark_arc().encode(
+    alt.Theta("量:Q", stack="normalize"),
+    alt.Color("内訳:N")
+)
+
+st.write(chart.to_dict())
 
 
 
