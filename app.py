@@ -80,9 +80,13 @@ st.altair_chart(
     alt.Chart(df_s)
     .mark_arc()
     .encode(
-        alt.Theta("量:Q",title="合計量 【千t】"),
         alt.Theta("量:Q",title="各割合 【%】").stack("normalize"),
         alt.Color("内訳:N",title="内訳"),
+        alt.Tooltip([
+            alt.Tooltip("内訳:N", title="内訳"),
+            alt.Tooltip("量:Q", title="量【千t】", format=",.1f"),
+            alt.Tooltip("量:Q", title="割合【%】", stack="normalize", format=".1%")
+        ])
     )
     .configure_legend(orient="bottom")
 )
