@@ -16,21 +16,25 @@ st.write('(引用データ：〈担当機関・課室〉農林水産省　消費
 
 st.header('データ確認')
 
-st.write('[注意　書き換え箇所有り]')
-st.write('総計的な「計」と記入されている物を「総計」、' \
-'gvsw')
+st.write('〈注意　以下見やすさの為の書き換え箇所有り〉')
+st.write('総計的な「計」と記入されている物を「総計」')
 st.write("[食品製造業_]…(製)")
 st.write("[食品卸売業_]…(卸)")
 st.write("[食品小売業_]…(小)")
 st.write("[外食産業_]…(外)")
 st.write("[食品廃棄物等の年間発生量_]…(年)")
 st.write("")
-st.write("")
-st.write("")
+
+st.subheader("各省略箇所について")
+st.write("「食品廃棄物等の年間発生量_1)食品リサイクル法で規定している用途への実施量」における食品リサイクル法で規定している用途とは、肥料、飼料、菌床培地、メタン、油脂及び油脂製品、炭化製品（燃料及び還元剤）又はエタノールの原材料としての再生利用である。")
+st.write("「食品廃棄物等の年間発生量_2)その他」におけるその他とは、再生利用の実施量として、1)以外の食用品（食品添加物や調味料、健康食品等）、工業資材用（舗装用資材、塗料の原料等）、工芸用等の用途に仕向けた量及び不明のものをいう。")
+st.write("「3)再生利用等実施率」において、再生利用等実施率=当該年度の（発生抑制の実施量＋食品リサイクル法で規定している用途への実施量＋熱回収の実施量×0.95＋減量した量）÷当該年度の（発生抑制の実施量＋食品廃棄物等の年間発生量）")
+
+
 
 df = pd.read_csv('FEH_00500231_260202222416 copy.csv')
 
-df["total"] = df[["(年)1)食品リサイクル法で規定している用途への実施量【千t】","(年)熱回収の実施量【千t】","(年)減量した量【千t】","(年)2)その他【千t】","(年)廃棄物としての処分量【千t】"]].sum(axis=1)
+# df["total"] = df[["(年)1)食品リサイクル法で規定している用途への実施量【千t】","(年)熱回収の実施量【千t】","(年)減量した量【千t】","(年)2)その他【千t】","(年)廃棄物としての処分量【千t】"]].sum(axis=1)
 
 cols = [
     "(年)1)食品リサイクル法で規定している用途への実施量【千t】",
@@ -52,13 +56,13 @@ df_long["食品産業"] = df_long["食品産業"].astype(str)
 order = df_long["食品産業"].unique().tolist()
 
 with st.container():
-    st.subheader("各量の全体量とそれの内訳の比較の為の棒グラフ")    
+    st.subheader("各食品産業種の食品廃棄物等の年間発生量とそれらの内訳の比較の為の棒グラフ")
     st.altair_chart(
         alt.Chart(df_long)
         .mark_bar()
         .encode(
-            alt.X("食品産業:N",sort=order,title="食品産業計種類"),
-            alt.Y("sum(量):Q",title="合計量 【千t】"),
+            alt.X("食品産業:N",sort=order,title="食品産業計の種類"),
+            alt.Y("sum(量):Q",title="食品廃棄物等の年間発生量 【千t】"),
             alt.Color("内訳:N",title="内訳"),
         )
         .configure_legend(orient="bottom"),
@@ -66,13 +70,13 @@ with st.container():
     )
 
 with st.container():
-    st.subheader("各量の内訳の比較の為の棒グラフ")
+    st.subheader("各食品産業種の食品廃棄物等の年間発生量の内訳の各割合の比較の為の棒グラフ")
     st.altair_chart(
         alt.Chart(df_long)
         .mark_bar()
         .encode(
-            alt.X("食品産業:N",sort=order,title="食品産業計種類"),
-            alt.Y("sum(量):Q",stack="normalize",title="各割合 【%】"),
+            alt.X("食品産業:N",sort=order,title="食品産業計の種類"),
+            alt.Y("sum(量):Q",stack="normalize",title="各内訳の割合 【%】"),
             alt.Color("内訳:N",title="内訳"),
         )
         .configure_legend(orient="bottom"),
@@ -80,7 +84,7 @@ with st.container():
     )
 
 with st.sidebar:
-    st.subheader('円グラフに表示する')
+    st.subheader('内訳の割合の円グラフを表示する食品産業計種類')
     fo_lo_kind = st.selectbox('食品産業計種類を選択してください', 
                          df_long["食品産業"].unique())
 
@@ -90,8 +94,8 @@ df_s = df_s.copy()
 # df_s["割合"] = df_s["量"] / df_s["量"].sum()
 
 with st.container():
-    st.subheader("内訳の割合の円グラフ")
-    st.write("〈ページ左上の＞をクリックして開くことができるサイドバーの中で、内訳を確認したい食品産業計種類を選択してください。〉")
+    st.subheader("各食品産業種の食品廃棄物等の年間発生量の内訳の割合の円グラフ")
+    st.write("〈ページ左上の＞をクリックして開くことができるサイドバーの中で、内訳の割合を確認したい食品産業計種類を選択してください。〉")
     st.altair_chart(
         alt.Chart(df_s)
         .mark_arc()
@@ -107,9 +111,3 @@ with st.container():
         .configure_legend(orient="bottom"),
         use_container_width=True
     )
-
-
-# 以下の要素を１つ以上含めること：
-# ✓ アプリの概要‧目的‧使い方の説明
-# ✓ データの確認（件数、期間、対象など）
-# ✓ 可視化結果の簡単な解釈や説明
