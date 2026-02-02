@@ -32,9 +32,9 @@ with cols[0].container(border=True):
         alt.Chart(df)
         .mark_bar()
         .encode(
-            alt.X("食品産業:N").title("食品産業計種類"),
-            alt.Y("sum(total):Q").aggregate(df["食品廃棄物等の年間発生量_計【千t】"]).title("合計量 【千t】"),
-            alt.Color("食品産業:N").title("各量"),
+            alt.X("食品産業:N",title="食品産業計種類"),
+            alt.Y("sum(total):Q",title="合計量 【千t】"),
+            alt.Color("食品産業:N",title="各量"),
         )
         .configure_legend(orient="bottom")
     )
