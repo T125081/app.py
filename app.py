@@ -93,6 +93,12 @@ df_s["割合"] = df_s["量"] / df_s["量"].sum()
 st.subheader("内訳の円グラフ〈ページ左上の＞をクリックして開くことができるサイドバーの中で、内訳を確認したい食品産業計種類を選択してください。〉")
 st.altair_chart(
     alt.Chart(df_s)
+    .transform_joinaggregate(
+        total="sum(量)"
+    )
+    .transform_calculate(
+        割合="datum.量 / datum.total"
+    )
     .mark_arc()
     .encode(
         alt.Theta("量:Q"),
