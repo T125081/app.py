@@ -27,9 +27,6 @@ df = pd.read_csv('FEH_00500231_260202222416 copy.csv')
 df["total"] = df[["(年)1)食品リサイクル法で規定している用途への実施量【千t】","(年)熱回収の実施量【千t】","(年)減量した量【千t】","(年)2)その他【千t】","(年)廃棄物としての処分量【千t】"]].sum(axis=1)
 
 
-
-# AIに聞いた箇所↓
-
 cols = [
     "(年)1)食品リサイクル法で規定している用途への実施量【千t】",
     "(年)熱回収の実施量【千t】",
@@ -46,8 +43,6 @@ df_long = df.melt(
 )
 
 order = df["食品産業"].tolist()
-
-# AIに聞いた箇所↑
 
 st.subheader("各量の全体量とそれの内訳の比較の為の棒グラフ")    
 st.altair_chart(
@@ -73,53 +68,23 @@ st.altair_chart(
     .configure_legend(orient="bottom")
 )
 
+with st.sidebar:
+    st.subheader('円グラフに表示する')
+    fo_lo_kind = st.selectbox('食品産業計種類を選択してください', 
+                         df_long["食品産業"].unique())
 
-# with cols1[1]:
-#     "### "
-
-#     st.altair_chart(
-#         alt.Chart(df_long)
-#         .mark_bar()
-#         .encode(
-#             alt.X("食品産業:N",sort=order,title="食品産業計種類"),
-#             alt.Y("count():Q", title="各割合 【%】").stack("normalize"),
-#             alt.Color("weather:N"),
-#         )
-#         .configure_legend(orient="bottom")
-#     )
-
-
-
-
-# with st.sidebar:
-#     st.subheader('円グラフに表示する')
-#     prod_category = st.multiselect('食品産業計種類を選択してください（複数選択可）', 
-#                                    df['prod_category'].unique())
-#     media = st.selectbox('広告媒体を選択してください', 
-#                          df['media'].unique())
-#     st.subheader('色分け')    
-#     color = st.selectbox('分類を選択してください',
-#                       ['性別', '年齢層', '季節'])  
-#     if color == '性別':
-#         color = 'sex'
-#     elif color == '年齢層':
-#         color = 'age'
-#     else:
-#         color = 'season'
+df_s = df_long[df_long["食品産業"]==fo_lo_kind]
     
-
-# with cols[1].container(border=True, height="stretch"):
-#     "### Weather distribution"
-
-#     st.altair_chart(
-#         alt.Chart(df)
-#         .mark_arc()
-#         .encode(
-#             alt.Theta("count()"),
-#             alt.Color("weather:N"),
-#         )
-#         .configure_legend(orient="bottom")
-#     )
+st.subheader("内訳の円グラフ")
+st.altair_chart(
+    alt.Chart(df_s)
+    .mark_arc()
+    .encode(
+        alt.Theta("量:Q",title="各割合 【%】"),
+        alt.Color("内訳:N",title="内訳"),
+    )
+    .configure_legend(orient="bottom")
+)
 
 
 
