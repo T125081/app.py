@@ -23,8 +23,6 @@ st.write("")
 
 df = pd.read_csv('FEH_00500231_260202222416 copy.csv')
 
-# df["total"] = df[["(年)1)食品リサイクル法で規定している用途への実施量【千t】","(年)熱回収の実施量【千t】","(年)減量した量【千t】","(年)2)その他【千t】","(年)廃棄物としての処分量【千t】"]].sum(axis=1)
-
 cols = [
     "(年)1)食品リサイクル法で規定している用途への実施量【千t】",
     "(年)熱回収の実施量【千t】",
@@ -149,7 +147,6 @@ with st.sidebar:
 df_s = df_long[df_long["食品産業"]==fo_lo_kind]
 
 df_s = df_s.copy()
-# df_s["割合"] = df_s["量"] / df_s["量"].sum()
 
 with st.container():
     st.subheader("【各食品産業種の食品廃棄物等の年間発生量の内訳の割合の円グラフ】")
@@ -160,11 +157,6 @@ with st.container():
         .encode(
             alt.Theta("量:Q",stack="normalize"),
             alt.Color("内訳:N",title="内訳"),
-            # alt.Tooltip([
-            #     alt.Tooltip("内訳:N", title="内訳"),
-            #     alt.Tooltip("量:Q", title="量【千t】", format=",.1f"),
-            #     alt.Tooltip("割合:Q", title="割合【%】", format=".1%")
-            # ])
         )
         .configure_legend(orient="bottom"),
         use_container_width=True
