@@ -80,7 +80,7 @@ st.altair_chart(
     alt.Chart(df_s)
     .mark_arc()
     .encode(
-        alt.Theta("量:Q",title="各割合 【%】").stack("normalize"),
+        alt.Theta("量:Q",stack="normalize",title="各割合 【%】"),
         alt.Color("内訳:N",title="内訳"),
         alt.Tooltip([
             alt.Tooltip("内訳:N", title="内訳"),
