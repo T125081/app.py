@@ -17,6 +17,9 @@ st.write("")
 st.write("")
 
 st.header('〈データ確認〉')
+st.write("（※　ページ左上の＞をクリックして開くことができるサイドバーの中で、各注意事項について確認できます。）")
+st.write("")
+st.write("")
 
 df = pd.read_csv('FEH_00500231_260202222416 copy.csv')
 
@@ -79,6 +82,8 @@ with st.sidebar:
     st.subheader('〈内訳の割合の円グラフを表示する食品産業計種類〉')
     fo_lo_kind = st.selectbox('食品産業計種類を選択してください', 
                          df_long["食品産業"].unique())
+    st.write("")
+    st.write("")
     st.write('〈注意　以下見やすさの為の書き換え箇所有り〉')
     st.write('総計的な「計」と記入されている物を「総計」')
     st.write("[食品製造業_]…(製)")
