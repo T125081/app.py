@@ -44,9 +44,9 @@ df_long = df.melt(
 )
 
 # AIに聞いた箇所↑
-cols = st.columns(2)
+cols1 = st.columns(2)
 
-with cols[0]:
+with cols1[0]:
     "### 各量の全体量とそれの内訳の比較棒グラフ"
 
     st.altair_chart(
