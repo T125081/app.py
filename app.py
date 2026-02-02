@@ -36,7 +36,7 @@ st.write("(年)熱回収の実施量【千t】")
 st.write("(年)減量した量【千t】")
 st.write("(年)2)その他【千t】")
 st.write("(年)廃棄物としての処分量【千t】")
-
+st.write("")
 st.write("食品産業計の種類")
 st.write("食品産業総計")
 st.write("食品製造業総計")
