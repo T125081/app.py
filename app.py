@@ -14,7 +14,7 @@ st.write('説明内容')
 
 st.header('データ確認')
 
-df = pd.read_csv('nu-r5-1-1.xlsx')
+df = pd.read_csv('')
 
 with st.sidebar:
     st.subheader('抽出条件')
