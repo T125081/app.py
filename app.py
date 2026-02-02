@@ -97,11 +97,11 @@ st.altair_chart(
     .encode(
         alt.Theta("量:Q"),
         alt.Color("内訳:N",title="内訳"),
-        alt.Tooltip([
-            alt.Tooltip("内訳:N", title="内訳"),
-            alt.Tooltip("量:Q", title="量【千t】", format=",.1f"),
-            alt.Tooltip("割合:Q", title="割合【%】", format=".1%")
-        ])
+        # alt.Tooltip([
+        #     alt.Tooltip("内訳:N", title="内訳"),
+        #     alt.Tooltip("量:Q", title="量【千t】", format=",.1f"),
+        #     alt.Tooltip("割合:Q", title="割合【%】", format=".1%")
+        # ])
     )
     .configure_legend(orient="bottom"),
     use_container_width=True
