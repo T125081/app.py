@@ -46,7 +46,7 @@ df_long["食品産業"] = df_long["食品産業"].astype(str)
 
 order = df_long["食品産業"].unique().tolist()
 
-with st.container:
+with st.container():
 
     st.subheader("各量の全体量とそれの内訳の比較の為の棒グラフ")    
     st.altair_chart(
